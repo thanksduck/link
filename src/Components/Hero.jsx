@@ -19,7 +19,7 @@ function Hero({ darkMode }) {
                 body: JSON.stringify({ "originalUrl": link }),
             };
 
-            const response = await fetch("https://go.20032003.xyz/api", requestOptions);
+            const response = await fetch("/api", requestOptions);
 
             if (!response.ok) {
                 throw new Error('Failed to shorten the link');
