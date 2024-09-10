@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function Hero({ darkMode }) {
     const [link, setLink] = useState('');
     const [shortLink, setShortLink] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleClick = async (e) => {
         e.preventDefault();
         const linknew = link + "originalUrl: ";
         const lg = linknew.length.toString();
+        setLoading(true);
+        setError('');
+
         try {
-            const requestOptions = {
-                method: "POST",
-                headers: { 
+            const response = await axios.post("/api", { originalUrl: link }, {
+                headers: {
                     "Content-Type": "application/json",
                     "Host": "go.20032003.xyz",
                     "Content-Length": lg,
                 },
-                body: JSON.stringify({ "originalUrl": link }),
-            };
+            });
 
-            const response = await fetch("/api", requestOptions);
-
-            if (!response.ok) {
-                throw new Error('Failed to shorten the link');
-            }
-
-            const data = await response.json();
+            const data = response.data;
             const shortUrl = data.shortUrl;
 
             setShortLink(`https://go.20032003.xyz/${shortUrl}`);
         } catch (error) {
-            console.error(error);
+            setError(error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -51,10 +51,16 @@ function Hero({ darkMode }) {
                         type="submit"
                         className={`w-full py-3 font-semibold rounded-lg shadow transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 ${darkMode ? 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-400' : 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-400'}`}
                     >
-                        Shorten Link
+                        {loading ? 'Loading...' : 'Shorten Link'}
                     </button>
                 </form>
-                {shortLink && (
+                {error && (
+                    <div className="mt-6 w-full text-center items-center">
+                        <p className="text-lg font-semibold mb-4">Error:</p>
+                        <p className="text-red-500">{error}</p>
+                    </div>
+                )}
+                {shortLink && !error && (
                     <div className="mt-6 w-full text-center items-center">
                         <p className="text-lg font-semibold mb-4">Shortened Link:</p>
                         <a href={shortLink} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 text-center items-center bg-green-500 text-white rounded-lg shadow hover:bg-green-600">
