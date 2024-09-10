@@ -14,7 +14,7 @@ function Hero({ darkMode }) {
                 body: JSON.stringify({ "originalUrl": link }),
             };
 
-            const response = await fetch("/api", requestOptions);
+            const response = await fetch("https://short.results5.workers.dev/api", requestOptions);
 
             if (!response.ok) {
                 throw new Error('Failed to shorten the link');
