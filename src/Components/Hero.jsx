@@ -6,13 +6,15 @@ function Hero({ darkMode }) {
 
     const handleClick = async (e) => {
         e.preventDefault();
-
+        const linknew = link + "originalUrl: ";
+        const lg = linknew.length.toString();
         try {
             const requestOptions = {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json",
-                    "Host": "go.20032003.xyz"
+                    "Host": "go.20032003.xyz",
+                    "Content-Length": lg,
                 },
                 body: JSON.stringify({ "originalUrl": link }),
             };
