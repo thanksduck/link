@@ -10,11 +10,14 @@ function Hero({ darkMode }) {
         try {
             const requestOptions = {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Host": "go.20032003.xyz"
+                },
                 body: JSON.stringify({ "originalUrl": link }),
             };
 
-            const response = await fetch("https://short.results5.workers.dev/api", requestOptions);
+            const response = await fetch("https://go.20032003.xyz/api", requestOptions);
 
             if (!response.ok) {
                 throw new Error('Failed to shorten the link');
