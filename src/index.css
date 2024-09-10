@@ -1,0 +1,28 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: poppins;
+
+  }
+
+.sun-logo {
+    transition: transform 0.3s ease, rotate 0.3s ease;
+  }
+  
+  .sun-logo:hover {
+    transform: scale(1.1);
+    animation: rotate-animation 0.3s infinite linear;
+  }
+  
+  @keyframes rotate-animation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
