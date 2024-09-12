@@ -18,8 +18,6 @@ function Hero({ darkMode }) {
             const response = await axios.post("/api", { originalUrl: link }, {
                 headers: {
                     "Content-Type": "application/json",
-                    // "Host": "go.20032003.xyz",
-                    // "Content-Length": lg,
                 },
             });
 
