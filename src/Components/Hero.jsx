@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import context from "../functions/index";
 import axios from "axios";
 
 function Hero({ darkMode }) {
@@ -15,12 +16,12 @@ function Hero({ darkMode }) {
     setError("");
     try {
       const response = await axios.post(
-        "/api",
+        "https://n3y.in/api",
         { originalUrl: link },
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.TOKEN}`,
+            Authorization: `Bearer ${context.env.TOKEN}`,
           },
         }
       );
