@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import context from "../functions/index";
 import axios from "axios";
 
 function Hero({ darkMode }) {
@@ -21,7 +20,7 @@ function Hero({ darkMode }) {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${context.env.TOKEN}`,
+            Authorization: `Bearer ${process.env.TOKEN}`,
           },
         }
       );
